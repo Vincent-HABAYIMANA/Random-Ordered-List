@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Random Order List</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    h1 {
+        margin-bottom: 15px;
+    }
+
+    input {
+        width: 60%;
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+    }
+
+    button {
+        padding: 10px 15px;
+        margin-left: 5px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #38bdf8;
+        font-weight: bold;
+    }
+
+    #result {
+        margin-top: 20px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        background: #1e293b;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .item {
+        padding: 8px;
+        margin: 5px 0;
+        background: #334155;
+        border-radius: 6px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Random Order List</h1>
+
+<input id="inputBox" placeholder="Enter items (e.g. Ali, John, 10, 55)" />
+<button onclick="generate()">Randomize</button>
+<button onclick="clearList()">Clear</button>
+
+<div id="result"></div>
+
+<script>
+function generate() {
+    const input = document.getElementById("inputBox").value;
+    const result = document.getElementById("result");
+
+    if (!input.trim()) return;
+
+    let items = input.split(",").map(i => i.trim()).filter(i => i);
+
+    // shuffle randomly
+    items.sort(() => Math.random() - 0.5);
+
+    // display ordered list
+    result.innerHTML = "";
+
+    items.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerText = `${index + 1}. ${item}`;
+        result.appendChild(div);
+    });
+}
+
+function clearList() {
+    document.getElementById("inputBox").value = "";
+    document.getElementById("result").innerHTML = "";
+}
+</script>
+
+</body>
+</html>
